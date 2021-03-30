@@ -5,7 +5,7 @@ public class Planet {
     public double yyVel; //Its current velocity in the y direction
     public double mass; //Its mass
     public String imgFileName; //The name of the file that corresponds to the image that depicts the planet (for example, jupiter.gif)
-    public static double G = 6.67e-11; //Gravitational constant as a ‘static final’ variable
+    private static double G = 6.67e-11; //Gravitational constant as a ‘static final’ variable
 
     public Planet(double xP, double yP, double xV, double yV, double m, String img) {
         xxPos = xP;
