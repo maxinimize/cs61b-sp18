@@ -82,18 +82,16 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method - recursive
-        if (A.rest == null) {
-            A.rest = B;
-            return A;
+        if (A == null) {
+            return B;
         }
         A.rest = dcatenate(A.rest, B);
         return A;
 
         //TODO:  fill in method - iterative
         /*
-        if (A.rest == null) {
-            A.rest = B;
-            return A;
+        if (A == null) {
+            return B;
         }
         IntList ptr = A;
         while (ptr.rest != null) {
