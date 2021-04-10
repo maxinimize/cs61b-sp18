@@ -30,14 +30,14 @@ public class ArrayDeque<T> {
 	}
 
 	/** Helper functions: Indexing in circular array */
-	public int addOne(int x) {
+	private int addOne(int x) {
 		if (x == items.length - 1) {
 			return 0;
 		}
 		return x++;
 	}
 
-	public int minusOne(int x) {
+	private int minusOne(int x) {
 		if (x == 0) {
 			return items.length - 1;
 		}
@@ -66,11 +66,11 @@ public class ArrayDeque<T> {
 		return size == 0;
 	}
 
-	private int size() {
+	public int size() {
 		return size;
 	}
 
-	private void printDeque() {
+	public void printDeque() {
 		int i = 0;
 		while (i < size) {
 			System.out.print(get(i)+" ");
