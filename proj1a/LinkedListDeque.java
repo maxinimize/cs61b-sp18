@@ -22,7 +22,7 @@ public class LinkedListDeque<T> {
 	}
 
 	/** Constructor: copy*/
-	public LinkedListDeque(LinkedListDeque<T> copy) {
+	private LinkedListDeque(LinkedListDeque<T> copy) {
 		sentinel = new Node("Sentinel", null, null);
 		for (int i = 0; i < copy.size(); i++) {
 			this.addLast(copy.get(i));
@@ -118,7 +118,7 @@ public class LinkedListDeque<T> {
 		if (index >= size) {
 			return null;
 		}
-		LinkedListDeque<T> ptr = new LinkedListDeque<T>(this);;
+		LinkedListDeque<T> ptr = new LinkedListDeque<T>(this);
 		if (index == 0) {
 			return ptr.get(0);
 		} else {

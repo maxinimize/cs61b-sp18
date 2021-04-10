@@ -84,7 +84,7 @@ public class ArrayDeque<T> {
 		if (size == 0) {
 			return null;
 		}
-		T x = get(addOne(nextFirst));
+		T x = items[addOne(nextFirst)];
 		items[addOne(nextFirst)] = null;
 		nextFirst = addOne(nextFirst);
 		size--;
@@ -98,7 +98,7 @@ public class ArrayDeque<T> {
 		if (size == 0) {
 			return null;
 		}
-		T x = get(minusOne(nextLast));
+		T x = items[minusOne(nextLast)];
 		items[minusOne(nextLast)] = null;
 		nextLast = minusOne(nextLast);
 		size--;
