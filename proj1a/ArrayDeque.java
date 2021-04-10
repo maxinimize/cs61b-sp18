@@ -11,7 +11,7 @@ public class ArrayDeque<T> {
 		nextLast = 0;
 	}
 
-	/** Resizes the underlying array to the target capacity. */
+	/** Helper function: Resizing the underlying array to the target capacity. */
 	private void resize(int capacity) {
 		T[] a = (T[]) new Object[capacity];
 
@@ -29,13 +29,28 @@ public class ArrayDeque<T> {
 		items = a;
 	}
 
+	/** Helper functions: Indexing in circular array */
+	public int addOne(int x) {
+		if (x == items.length - 1) {
+			return 0;
+		}
+		return x++;
+	}
+
+	public int minusOne(int x) {
+		if (x == 0) {
+			return items.length - 1;
+		}
+		return x--;
+	}
+
 	public void addFirst(T item) {
 		if (size == items.length) {
 			resize(size * 2);
 		}
 		items[nextFirst] = item;
-		nextFirst -= 1;
-		size += 1;
+		minusOne(nextFirst);
+		size++;
 	}
 
 	public void addLast(T item) {
@@ -44,8 +59,8 @@ public class ArrayDeque<T> {
 		}
 
 		items[nextLast] = item;
-		nextLast += 1;
-		size += 1;
+		addOne(nextLast);
+		size++;
 	}
 
 	public boolean isEmpty() {
@@ -58,7 +73,7 @@ public class ArrayDeque<T> {
 
 	public void printDeque() {
 		int i = 0;
-		while (i < size {
+		while (i < size) {
 			System.out.print(get(i)+" ");
 			i++;
 		}
@@ -70,10 +85,10 @@ public class ArrayDeque<T> {
 		}
 		T x = get(nextFirst + 1);
 		items[nextFirst + 1] = null;
-		nextFirst += 1;
-		size -= 1;
+		addOne(nextFirst);
+		size--;
 		if (Double.valueOf(size) / Double.valueOf(items.length) < 0.25) {
-			resize(size / 2);
+			resize(items.length / 2);
 		}
 		return x;
 	}
@@ -84,10 +99,10 @@ public class ArrayDeque<T> {
 		}
 		T x = get(nextLast - 1);
 		items[nextLast - 1] = null;
-		nextLast -= 1;
-		size -= 1;
+		minusOne(nextLast);
+		size--;
 		if (Double.valueOf(size) / Double.valueOf(items.length) < 0.25) {
-			resize(size / 2);
+			resize(items.length / 2);
 		}
 		return x;
 	}
