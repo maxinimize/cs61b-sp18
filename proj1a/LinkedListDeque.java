@@ -1,9 +1,9 @@
 /** Performs some basic linked list tests. */
 public class LinkedListDeque<T> {
 	private class Node<T> {
-		public Node prev;
-		public T item;
-		public Node next;
+		private Node prev;
+		private T item;
+		private Node next;
 
 		public Node(T i, Node p, Node n) {
 			prev = p;
@@ -12,21 +12,23 @@ public class LinkedListDeque<T> {
 		}
 	}
 
-	/* The first item (if it exists) is at sentinel.next. */
 	private Node sentinel;
 	private int size;
 
+	/** Constructor: empty*/
 	public LinkedListDeque() {
 		sentinel = new Node("Sentinel", null, null);
 		size = 0;
 	}
-	/*
-	public LinkedListDeque(T item) {
+
+	/** Constructor: copy*/
+	public LinkedListDeque(LinkedListDeque<T> copy) {
 		sentinel = new Node("Sentinel", null, null);
-		sentinel.next = new Node(item, sentinel.next, sentinel.next);
-		size = 1;
+		for (int i = 0; i < copy.size(); i++) {
+			this.addLast(copy.get(i));
+		}
+		size = copy.size();
 	}
-	 */
 
 	public void addFirst(T item) {
 		if (size == 0) {
@@ -64,10 +66,10 @@ public class LinkedListDeque<T> {
 	public void printDeque() {
 		Node<T> ptr = sentinel.next;
 		while (ptr.next != sentinel.next) {
-			System.out.print(ptr.item+" ");
+			System.out.print(ptr.item + " ");
 			ptr = ptr.next;
 		}
-		System.out.print(ptr.item+" ");
+		System.out.print(ptr.item + " ");
 	}
 
 	public T removeFirst() {
@@ -75,9 +77,13 @@ public class LinkedListDeque<T> {
 			return null;
 		}
 		Node<T> first = sentinel.next;
-		sentinel.next.next.prev = sentinel.next.prev;
-		sentinel.next.prev.next = sentinel.next.next;
-		sentinel.next = sentinel.next.next;
+		if (size == 1) {
+			sentinel.next = null;
+		} else {
+			sentinel.next.next.prev = sentinel.next.prev;
+			sentinel.next.prev.next = sentinel.next.next;
+			sentinel.next = sentinel.next.next;
+		}
 		size -= 1;
 		return first.item;
 	}
@@ -87,8 +93,12 @@ public class LinkedListDeque<T> {
 			return null;
 		}
 		Node<T> last = sentinel.next.prev;
-		sentinel.next.prev.prev.next = sentinel.next;
-		sentinel.next.prev = sentinel.next.prev.prev;
+		if (size == 1) {
+			sentinel.next = null;
+		} else {
+			sentinel.next.prev.prev.next = sentinel.next;
+			sentinel.next.prev = sentinel.next.prev.prev;
+		}
 		size -= 1;
 		return last.item;
 	}
@@ -108,7 +118,7 @@ public class LinkedListDeque<T> {
 		if (index >= size) {
 			return null;
 		}
-		LinkedListDeque<T> ptr = this;
+		LinkedListDeque<T> ptr = new LinkedListDeque<T>(this);;
 		if (index == 0) {
 			return ptr.get(0);
 		} else {

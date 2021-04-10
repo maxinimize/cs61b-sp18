@@ -57,6 +57,10 @@ public class LinkedListDequeTest {
 		System.out.println("Printing out deque: ");
 		lld1.printDeque();
 
+		System.out.println("Printing out deque: "+lld1.getRecursive(2));
+		System.out.println("Printing out deque: "+lld1.getRecursive(1));
+		System.out.println("Printing out deque: "+lld1.getRecursive(0));
+
 		printTestStatus(passed);
 
 	}
@@ -79,6 +83,9 @@ public class LinkedListDequeTest {
 		lld1.removeFirst();
 		// should be empty 
 		passed = checkEmpty(true, lld1.isEmpty()) && passed;
+
+		lld1.removeFirst();
+		passed = checkSize(0, lld1.size()) && passed;
 
 		printTestStatus(passed);
 

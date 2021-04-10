@@ -21,7 +21,7 @@ public class ArrayDeque<T> {
 		} else {
 			// Case: First, ..., items.length - 1, 0, ..., Last
 			System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
-			System.arraycopy(items, 0, a,items.length - nextFirst - 1, size - items.length + nextFirst + 1);
+			System.arraycopy(items, 0, a, items.length - nextFirst - 1, size - items.length + nextFirst + 1);
 		}
 		items = a;
 		// Reset nextFirst and nextLast for the resized array
@@ -75,7 +75,7 @@ public class ArrayDeque<T> {
 	public void printDeque() {
 		int i = 0;
 		while (i < size) {
-			System.out.print(get(i)+" ");
+			System.out.print(get(i) + " ");
 			i++;
 		}
 	}
