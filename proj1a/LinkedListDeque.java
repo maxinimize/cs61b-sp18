@@ -21,12 +21,12 @@ public class LinkedListDeque<T> {
 	}
 
 	/** Constructor: copy - private as a helper function for sp18 grading */
-	private LinkedListDeque(LinkedListDeque<T> copy) {
+	private LinkedListDeque(LinkedListDeque<T> other) {
 		sentinel = new Node("Sentinel", null, null);
-		for (int i = 0; i < copy.size(); i++) {
-			this.addLast(copy.get(i));
+		for (int i = 0; i < other.size(); i++) {
+			this.addLast(other.get(i));
 		}
-		size = copy.size();
+		size = other.size();
 	}
 
 	public void addFirst(T item) {
