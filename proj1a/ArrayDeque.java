@@ -34,14 +34,16 @@ public class ArrayDeque<T> {
 		if (x == items.length - 1) {
 			return 0;
 		}
-		return x++;
+		x++;
+		return x;
 	}
 
 	private int minusOne(int x) {
 		if (x == 0) {
 			return items.length - 1;
 		}
-		return x--;
+		x--;
+		return x;
 	}
 
 	public void addFirst(T item) {
@@ -49,7 +51,7 @@ public class ArrayDeque<T> {
 			resize(size * 2);
 		}
 		items[nextFirst] = item;
-		minusOne(nextFirst);
+		nextFirst = minusOne(nextFirst);
 		size++;
 	}
 
@@ -58,7 +60,7 @@ public class ArrayDeque<T> {
 			resize(size * 2);
 		}
 		items[nextLast] = item;
-		addOne(nextLast);
+		nextLast = addOne(nextLast);
 		size++;
 	}
 
@@ -86,7 +88,7 @@ public class ArrayDeque<T> {
 		items[addOne(nextFirst)] = null;
 		nextFirst = addOne(nextFirst);
 		size--;
-		if (Double.valueOf(size) / Double.valueOf(items.length) < 0.25) {
+		if ((Double.valueOf(size) / Double.valueOf(items.length) < 0.25) && items.length > 8) {
 			resize(items.length / 2);
 		}
 		return x;
@@ -100,7 +102,7 @@ public class ArrayDeque<T> {
 		items[minusOne(nextLast)] = null;
 		nextLast = minusOne(nextLast);
 		size--;
-		if (Double.valueOf(size) / Double.valueOf(items.length) < 0.25) {
+		if ((Double.valueOf(size) / Double.valueOf(items.length) < 0.25) && items.length > 8) {
 			resize(items.length / 2);
 		}
 		return x;
