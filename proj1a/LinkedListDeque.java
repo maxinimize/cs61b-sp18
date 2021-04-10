@@ -1,4 +1,3 @@
-/** Performs some basic linked list tests. */
 public class LinkedListDeque<T> {
 	private class Node<T> {
 		private Node prev;
@@ -15,13 +14,13 @@ public class LinkedListDeque<T> {
 	private Node sentinel;
 	private int size;
 
-	/** Constructor: empty*/
+	/** Constructor: empty */
 	public LinkedListDeque() {
 		sentinel = new Node("Sentinel", null, null);
 		size = 0;
 	}
 
-	/** Constructor: copy*/
+	/** Constructor: copy - private as a helper function for sp18 grading */
 	private LinkedListDeque(LinkedListDeque<T> copy) {
 		sentinel = new Node("Sentinel", null, null);
 		for (int i = 0; i < copy.size(); i++) {
