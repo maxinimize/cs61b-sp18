@@ -3,18 +3,20 @@ package byog.Core;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 
+import java.util.Random;
+
 
 public class MapVisualTest {
     public static void main(String[] args) {
         TERenderer ter = new TERenderer();
-        ter.initialize(MapGenerator.WIDTH, MapGenerator.HEIGHT);
+        ter.initialize(80, 40);
 
-        TETile[][] randomTiles = new TETile[MapGenerator.WIDTH][MapGenerator.HEIGHT];
+        TETile[][] randomTiles = new TETile[80][40];
 
-        MapGenerator.fillWithRandomRooms(randomTiles);
-        MapGenerator.connectRooms(randomTiles);
-        MapGenerator.fillWithWallTiles(randomTiles);
-        MapGenerator.fillWithBlankTiles(randomTiles);
+        long SEED = 287013;
+        Random RANDOM = new Random(SEED);
+
+        MapGenerator.WorldGenerator(randomTiles,RANDOM);
 
         ter.renderFrame(randomTiles);
     }
