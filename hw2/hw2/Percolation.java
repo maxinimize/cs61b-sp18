@@ -4,8 +4,8 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
     private final int [][] grid;
-    private WeightedQuickUnionUF unionGrid2VSite; // grid with virtual top/bottom sites (N * N + 2 elements)
-    private WeightedQuickUnionUF unionGrid1VSite; // grid with virtual top site only (N * N + 1 elements), in case backwash
+    private WeightedQuickUnionUF unionGrid2VSite; // N * N + 2 elements
+    private WeightedQuickUnionUF unionGrid1VSite; // N * N + 1 elements, no bottom sites
     private final int[] dx = {-1, 1, 0, 0}, dy = {0, 0, -1, 1}; // neighbour orthogonal sites helper
     private int N;
     private int openSitesNumber;
@@ -34,7 +34,7 @@ public class Percolation {
 
     /** Convert (row, col) cell to ith cell
      */
-    private int xyTo1D (int row, int col) {
+    private int xyTo1D(int row, int col) {
         return row * N + col;
     }
 
@@ -45,12 +45,12 @@ public class Percolation {
         // check if it's open or not
         if (grid[row][col] != 1) {
             grid[row][col] = 1;
-            // if it's in the top row, connect it with virtual top sites (N * N th element)
+            // if it's in the top row, connect it with virtual top sites (N * N)
             if (row == 0) {
                 unionGrid2VSite.union(N * N, xyTo1D(row, col));
                 unionGrid1VSite.union(N * N, xyTo1D(row, col));
             }
-            // if it's in the bottom row, connect it with virtual bottom sites (N * N + 1 th element)
+            // if it's in the bottom row, connect it with virtual bottom sites (N * N + 1)
             if (row == N - 1) {
                 unionGrid2VSite.union(N * N + 1, xyTo1D(row, col));
             }
@@ -68,7 +68,7 @@ public class Percolation {
         for (int i = 0; i < 4; i++) {
             if (row + dx[i] >= 0 && row + dx[i] < N && col + dy[i] >= 0 && col + dy[i] < N) {
                 if (grid[row + dx[i]][col + dy[i]] == 1) {
-                    unionGrid.union(xyTo1D(row + dx[i], col + dy[i]), xyTo1D(row,col));
+                    unionGrid.union(xyTo1D(row + dx[i], col + dy[i]), xyTo1D(row, col));
                 }
             }
 
@@ -97,5 +97,9 @@ public class Percolation {
      */
     public boolean percolates() {
         return unionGrid2VSite.connected(N * N, N * N + 1);
+    }
+
+    public static void main(String[] args) {
+
     }
 }
